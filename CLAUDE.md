@@ -6,20 +6,34 @@
 
 ## Who You Are
 
-<!-- CUSTOMIZE: Replace with your actual info -->
-- **Name:** [Your Name]
-- **Business:** [Your Business Name]
-- **Industry:** [Your Industry/Niche]
-- **Role:** [Founder / CEO / Investor / etc.]
-- **Communication Style:** [Direct / Professional / Casual / etc.]
+- **Name:** Reginald Wilson (age 55)
+- **Family:** Married to Annette Wilson (27 years). Kids: Leah, Maya, RJ.
+- **Hometown:** Originally from New Orleans, LA
+- **Base:** Dallas–Fort Worth, Texas
+- **Businesses:**
+  - **Tremerealty LLC** — Real estate brokerage & investment (Realtor since 2004). Specialties: wholesale, fix & flip, creative financing, buy & hold.
+  - **Treme Estate Sales** — Estate sale company (DFW market)
+- **Role:** Founder / Owner / Investor
+- **Communication Style:** Direct and to the point. No fluff. Open to honest suggestions.
+
+## Your Team
+
+- **Leah Wilson** — Head of Marketing. Smart, powerful, vital to company success.
+- **Annette Wilson** — Financial Department. Runs all financials.
+- **Kim** — Estate Sales Manager. Runs and manages all estate sale operations.
 
 ## Your Brand Rules
 
-<!-- CUSTOMIZE: Add rules your AI should always follow -->
-- Website URL: [yoursite.com]
-- Company is always written as "[Company Name]" (exact formatting)
-- Tone in all writing: [describe your brand voice]
-- Never mention: [competitors, sensitive topics, etc.]
+- Companies are always written as "Tremerealty LLC" and "Treme Estate Sales" (exact formatting)
+- Tone: Direct, professional, no-nonsense. New Orleans grit, Texas hustle.
+- Never over-explain. Get to the point fast.
+
+## Your Daily Tools
+
+- **app.Dealsauce.io** — Property research + nationwide lead generation
+- **NTREIS.com** — MLS for DFW (Texas Realtor MLS)
+- **Estatesales.net** — Estate sale lead discovery
+- **Go High Level** — CRM (actively switching from Carrot to GHL)
 
 ---
 

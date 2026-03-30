@@ -1,28 +1,32 @@
-# Goals
+# Goals — Reginald Wilson
 
 ## 5-Year Vision
-<!-- What does your life/business look like in 5 years? -->
-[Add your 5-year vision here]
+Build Tremerealty LLC and Treme Estate Sales into fully systemized operations generating consistent passive and active income. Own a portfolio of sober living rentals producing monthly cash flow. Be the go-to wholesale and creative finance investor in DFW. Scale Treme Estate Sales to a regional brand with multiple crews.
 
 ## 1-Year Goals (2026)
-<!-- 3-5 big things you want to accomplish this year -->
-1. [Goal 1]
-2. [Goal 2]
-3. [Goal 3]
+1. Close 8 wholesale deals
+2. Buy and hold 2 deals — convert to sober living rentals
+3. Complete 20 estate sales through Treme Estate Sales
 
 ## This Quarter (Q1 2026)
-<!-- What needs to happen in the next 90 days? -->
-1. [Q1 Priority 1]
-2. [Q1 Priority 2]
-3. [Q1 Priority 3]
+1. Get Go High Level CRM fully set up and migrated from Carrot
+2. Build consistent lead pipeline using Dealsauce.io + Estatesales.net
+3. Get first 2 wholesale deals under contract
 
 ## This Week
-<!-- Top 3 things that move the needle this week -->
-1. [Week Priority 1]
-2. [Week Priority 2]
-3. [Week Priority 3]
+1. [Update with current week's top priorities]
+2.
+3.
+
+## 2026 Targets Tracker
+
+| Goal | Target | Done | Remaining |
+|------|--------|------|-----------|
+| Wholesale deals | 8 | 0 | 8 |
+| Buy & hold (sober living) | 2 | 0 | 2 |
+| Estate sales | 20 | 0 | 20 |
 
 ## Not Now (Backlog)
-<!-- Good ideas that aren't priorities yet -->
-- [Idea 1]
-- [Idea 2]
+- Expand estate sales outside DFW
+- Build out GHL automations for seller follow-up
+- Hire additional estate sale crew
