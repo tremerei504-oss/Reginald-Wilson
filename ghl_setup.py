@@ -132,6 +132,12 @@ SMS1 = ("Hey {{contact.first_name}}, this is Reginald with Wilson Estate Service
 SMS2 = ("Still here if you need us, {{contact.first_name}}. Most families we work with "
         "save 20–30% more by going pro. Want a free walkthrough? Just reply back.")
 
+SMS3 = ("{{contact.first_name}}, we've helped dozens of families in {{contact.city}} "
+        "get the most from their estate sales. Can I share a few quick tips? Just reply YES.")
+
+SMS4 = ("If you're curious about how we can help, reply or call us at 469-251-0301 anytime. "
+        "— Reginald, Wilson Estate Services")
+
 workflow_payload = {
     "locationId": LOCATION_ID,
     "name": "EstateSales Lead Nurture",
@@ -148,97 +154,151 @@ workflow_payload = {
     },
     "entryMode": "once_per_contact",
     "actions": [
-        # 1. Immediate SMS
+        # ── SMS #1 — immediate ────────────────────────────────────────────────
         {
             "type": "send_sms",
-            "name": "Immediate SMS #1",
+            "name": "SMS #1 — Immediate",
             "delayValue": 0,
             "delayType": "minutes",
             "message": SMS1,
         },
-        # 2. Wait 5 min → Email #1
+        # ── Wait 10 seconds, check for reply → SMS #2 ─────────────────────────
         {
-            "type": "send_email",
-            "name": "Email #1 — Free Quote",
-            "delayValue": 5,
-            "delayType": "minutes",
-            "subject": EMAIL1_SUBJECT,
-            "body": EMAIL1_BODY,
+            "type": "wait",
+            "name": "Wait 10s (reply check)",
+            "delayValue": 10,
+            "delayType": "seconds",
+            "stopOnReply": True,
+            "replyAction": {
+                "type": "if_else",
+                "condition": {"type": "reply_received"},
+                "yesActions": [
+                    {"type": "stop_workflow", "name": "Stop — Reply after SMS #1"},
+                    {
+                        "type": "move_to_stage",
+                        "name": "Move to Responded",
+                        "pipelineId": PIPELINE_ID,
+                        "stageId": stage_ids.get("Responded"),
+                    },
+                    {
+                        "type": "create_task",
+                        "name": "Task — Call within 1 hour",
+                        "title": "Call lead within 1 hour",
+                        "dueDate": "1h",
+                    },
+                ],
+            },
         },
-        # 3. Wait 1 day → SMS #2 (if no reply)
         {
             "type": "send_sms",
-            "name": "Day-1 SMS #2",
-            "delayValue": 1,
-            "delayType": "days",
+            "name": "SMS #2 — Follow-up",
             "message": SMS2,
-            "condition": {"type": "no_reply"},
         },
-        # 4. Wait 3 days → Email #2 (if no reply)
+        # ── Wait 1 minute, check for reply → SMS #3 ───────────────────────────
         {
-            "type": "send_email",
-            "name": "Day-3 Email #2",
-            "delayValue": 3,
-            "delayType": "days",
-            "subject": EMAIL2_SUBJECT,
-            "body": EMAIL2_BODY,
-            "condition": {"type": "no_reply"},
+            "type": "wait",
+            "name": "Wait 1min (reply check)",
+            "delayValue": 1,
+            "delayType": "minutes",
+            "stopOnReply": True,
+            "replyAction": {
+                "type": "if_else",
+                "condition": {"type": "reply_received"},
+                "yesActions": [
+                    {"type": "stop_workflow", "name": "Stop — Reply after SMS #2"},
+                    {
+                        "type": "move_to_stage",
+                        "name": "Move to Responded",
+                        "pipelineId": PIPELINE_ID,
+                        "stageId": stage_ids.get("Responded"),
+                    },
+                    {
+                        "type": "create_task",
+                        "name": "Task — Call within 1 hour",
+                        "title": "Call lead within 1 hour",
+                        "dueDate": "1h",
+                    },
+                ],
+            },
         },
-        # 5. Wait 7 days → Move stage + Email #3 (if no reply)
+        {
+            "type": "send_sms",
+            "name": "SMS #3 — Tips offer",
+            "message": SMS3,
+        },
+        # ── Wait 3 minutes, check for reply → SMS #4 ──────────────────────────
+        {
+            "type": "wait",
+            "name": "Wait 3min (reply check)",
+            "delayValue": 3,
+            "delayType": "minutes",
+            "stopOnReply": True,
+            "replyAction": {
+                "type": "if_else",
+                "condition": {"type": "reply_received"},
+                "yesActions": [
+                    {"type": "stop_workflow", "name": "Stop — Reply after SMS #3"},
+                    {
+                        "type": "move_to_stage",
+                        "name": "Move to Responded",
+                        "pipelineId": PIPELINE_ID,
+                        "stageId": stage_ids.get("Responded"),
+                    },
+                    {
+                        "type": "create_task",
+                        "name": "Task — Call within 1 hour",
+                        "title": "Call lead within 1 hour",
+                        "dueDate": "1h",
+                    },
+                ],
+            },
+        },
+        {
+            "type": "send_sms",
+            "name": "SMS #4 — Final Nurture",
+            "message": SMS4,
+        },
+        # ── Wait 6 minutes, check for reply → Long Nurture ────────────────────
+        {
+            "type": "wait",
+            "name": "Wait 6min (reply check)",
+            "delayValue": 6,
+            "delayType": "minutes",
+            "stopOnReply": True,
+            "replyAction": {
+                "type": "if_else",
+                "condition": {"type": "reply_received"},
+                "yesActions": [
+                    {"type": "stop_workflow", "name": "Stop — Reply after SMS #4"},
+                    {
+                        "type": "move_to_stage",
+                        "name": "Move to Responded",
+                        "pipelineId": PIPELINE_ID,
+                        "stageId": stage_ids.get("Responded"),
+                    },
+                    {
+                        "type": "create_task",
+                        "name": "Task — Call within 1 hour",
+                        "title": "Call lead within 1 hour",
+                        "dueDate": "1h",
+                    },
+                ],
+            },
+        },
+        # ── No reply after all 4 SMS → Long Nurture stage ─────────────────────
         {
             "type": "move_to_stage",
             "name": "Move to Long Nurture",
-            "delayValue": 7,
-            "delayType": "days",
             "pipelineId": PIPELINE_ID,
             "stageId": stage_ids.get("Long Nurture"),
-            "condition": {"type": "no_reply"},
         },
-        {
-            "type": "send_email",
-            "name": "Day-7 Email #3 — Keeping Warm",
-            "delayValue": 0,
-            "delayType": "minutes",
-            "subject": EMAIL3_SUBJECT,
-            "body": EMAIL3_BODY,
-        },
-        # 6. IF reply received → stop + move to Responded + task
+        # ── IF tag 'booked' added at any point → stop immediately ─────────────
         {
             "type": "if_else",
-            "name": "Reply Received Branch",
-            "condition": {"type": "reply_received"},
+            "name": "Booked Tag — Stop All",
+            "condition": {"type": "tag_added", "value": "booked"},
             "yesActions": [
-                {
-                    "type": "stop_workflow",
-                    "name": "Stop on Reply",
-                },
-                {
-                    "type": "move_to_stage",
-                    "name": "Move to Responded",
-                    "pipelineId": PIPELINE_ID,
-                    "stageId": stage_ids.get("Responded"),
-                },
-                {
-                    "type": "create_task",
-                    "name": "Task — Call within 1 hour",
-                    "title": "Call lead within 1 hour",
-                    "dueDate": "1h",
-                },
-            ],
-        },
-        # 7. IF tag 'booked' added → stop all
-        {
-            "type": "if_else",
-            "name": "Booked Tag Branch",
-            "condition": {
-                "type": "tag_added",
-                "value": "booked",
-            },
-            "yesActions": [
-                {
-                    "type": "stop_workflow",
-                    "name": "Stop on Booked Tag",
-                },
+                {"type": "stop_workflow", "name": "Stop — Contact Booked"},
             ],
         },
     ],
